@@ -15,16 +15,21 @@ const Button = ({ setFeedBack, feedback, text, setAll, all }) => {
 
 const Stadistics = ({ good, neutral, bad, all }) => {
   let average = (good - bad) / all;
-  let positive = (100*good) / all
+  let positive = (100 * good) / all;
   if (all > 0) {
     return (
-      <>
+      <table>
+        <tbody>
         <StatisticsLine text={"good"} value={good}></StatisticsLine>
         <StatisticsLine text={"neutral"} value={neutral}></StatisticsLine>
         <StatisticsLine text={"bad"} value={bad}></StatisticsLine>
         <StatisticsLine text={"average"} value={average}></StatisticsLine>
-        <StatisticsLine text={"positive"} value={positive + "%"}></StatisticsLine>
-      </>
+        <StatisticsLine
+          text={"positive"}
+          value={positive + "%"}
+        ></StatisticsLine>
+        </tbody>
+      </table>
     );
   } else {
     return (
@@ -37,10 +42,10 @@ const Stadistics = ({ good, neutral, bad, all }) => {
 
 const StatisticsLine = ({ text, value }) => {
   return (
-    <tr>
-      <td>{text}</td> 
-      <td>{value}</td>
-    </tr>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
   );
 };
 
@@ -52,7 +57,7 @@ const App = () => {
   const [all, setAll] = useState(0);
 
   return (
-    <div>
+    <>
       <h1>give feedback</h1>
       <Button
         setFeedBack={setGood}
@@ -82,7 +87,7 @@ const App = () => {
         bad={bad}
         all={all}
       ></Stadistics>
-    </div>
+    </>
   );
 };
 
