@@ -14,35 +14,35 @@ const Button = ({ setFeedBack, feedback, text, setAll, all }) => {
 };
 
 const Stadistics = ({ good, neutral, bad, all }) => {
-  
-  let average = (good - bad) / all
-  
+  let average = (good - bad) / all;
+  let positive = (100*good) / all
   if (all > 0) {
     return (
       <>
-
-        <StatisticsLine text={"good"} value = {good}></StatisticsLine>
-        <StatisticsLine text={"neutral"} value = {neutral}></StatisticsLine>
-        <StatisticsLine text={"bad"} value = {bad}></StatisticsLine>
-        <StatisticsLine text={"average"} value = {average}></StatisticsLine>
+        <StatisticsLine text={"good"} value={good}></StatisticsLine>
+        <StatisticsLine text={"neutral"} value={neutral}></StatisticsLine>
+        <StatisticsLine text={"bad"} value={bad}></StatisticsLine>
+        <StatisticsLine text={"average"} value={average}></StatisticsLine>
+        <StatisticsLine text={"positive"} value={positive + "%"}></StatisticsLine>
       </>
     );
   } else {
     return (
       <>
-
         <p>No feedback given</p>
       </>
     );
   }
 };
 
-const StatisticsLine = ({text, value}) => {
+const StatisticsLine = ({ text, value }) => {
   return (
-    <p>{text}: {value}</p>
-  )
-}
-
+    <tr>
+      <td>{text}</td> 
+      <td>{value}</td>
+    </tr>
+  );
+};
 
 const App = () => {
   // guarda los clics de cada botón en su propio estado
@@ -75,7 +75,7 @@ const App = () => {
         setAll={setAll}
         all={all}
       ></Button>
-              <h1>statistics</h1>
+      <h1>statistics</h1>
       <Stadistics
         good={good}
         neutral={neutral}
