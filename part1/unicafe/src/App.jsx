@@ -7,8 +7,8 @@ const Button = ({setFeedBack, feedback, text, setAll, all}) => {
 }
 
 const Stadistics = ({good, neutral,  bad, all}) =>{
-
-    return (
+  if(all > 0 ){
+        return (
      <>
       <h1>statistics</h1>
       <p>good {good}</p>
@@ -18,6 +18,15 @@ const Stadistics = ({good, neutral,  bad, all}) =>{
       <p>average {(good - bad) / all}</p>
     </>
     )
+  }
+  else{
+    return (
+    <>
+    <h1>statistics</h1>
+    <p>No feedback given</p>
+    </>)
+  }
+
 }
 
 const App = () => {
