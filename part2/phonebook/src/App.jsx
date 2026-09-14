@@ -33,7 +33,10 @@ const PersonForm = ({ newName, newNumber, persons, setPersons, setNewName, setNe
       return;
     }
 
-    setPersons(persons.concat(newPerson));
+    // setPersons(persons.concat(newPerson));
+    //hacemos un post a la db.json
+    axios.post("http://localhost:3001/persons", newPerson)
+      .then(response => setPersons(persons.concat(response.data)))
   };
 
   const handleNewName = (event) => {
@@ -75,7 +78,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
 
   let displayPersonsFilter = hasFilter
-    ? persons.filter((person) => person.name.toLowerCase().includes(nameFilter))
+    ? persons.filter((person) => person.name.toLowerCase().includes(nameFilter.toLowerCase()))
     : persons;
 
   useEffect(
