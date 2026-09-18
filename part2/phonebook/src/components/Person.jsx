@@ -5,7 +5,9 @@ const Person = ({ name, number, id, setPersons }) => (
     {name} {number}
     <button
       onClick={() => {
-        phonebookService.deletePerson(id);
+        if (window.confirm(`Do you want to eliminate ${name}`)) {
+          phonebookService.deletePerson(id);
+        }
         phonebookService.getAllPersons().then((persons) => setPersons(persons));
       }}
     >
