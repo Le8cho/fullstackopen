@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import phonebookService from "./services/phonebook"
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Agenda from "./components/Agenda";
-
 
 const App = () => {
 
@@ -42,7 +40,7 @@ const App = () => {
         setNewNumber={setNewNumber}
       ></PersonForm>
       <h2>Numbers</h2>
-      <Agenda displayPersonsFilter={displayPersonsFilter}></Agenda>
+      <Agenda displayPersonsFilter={displayPersonsFilter} setPersons={setPersons}></Agenda>
     </div>
   );
 };
