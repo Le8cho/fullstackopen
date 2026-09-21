@@ -1,4 +1,4 @@
-import phonebookService from "../services/phonebook"
+import phonebookService from "../services/phonebook";
 
 const PersonForm = ({
   newName,
@@ -8,8 +8,8 @@ const PersonForm = ({
   setNewName,
   setNewNumber,
 }) => {
-  const checkDuplicated = (newPerson) => {
-    return persons.findIndex((person) => newPerson.name === person.name) !== -1;
+  const searchDuplicated = (newPerson) => {
+    return persons.find((person) => newPerson.name === person.name);
   };
 
   const handleNewPerson = (event) => {
@@ -21,14 +21,24 @@ const PersonForm = ({
       number: newNumber,
     };
 
-    if (checkDuplicated(newPerson)) {
-      alert(`${newPerson.name} is already added to the phonebook`);
+    let foundPerson = searchDuplicated(newPerson);
+
+    if (typeof foundPerson === "undefined") {
+      //hacemos un post a la db.json
+      phonebookService.addPerson(newPerson, setPersons, persons);
       return;
+    } else {
+
+      foundPerson = {...foundPerson, number: newPerson.number};
+
+      if (
+        window.confirm(
+          `${foundPerson.name} is already added to the phonebook, replace the old number with a new one`,
+        )
+      ) {
+        phonebookService.updatePerson(foundPerson);
+      }
     }
-
-    //hacemos un post a la db.json
-    phonebookService.addPerson(newPerson, setPersons, persons);
-
   };
 
   const handleNewName = (event) => {
