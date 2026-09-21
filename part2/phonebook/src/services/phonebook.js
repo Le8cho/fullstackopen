@@ -16,13 +16,23 @@ const deletePerson = (id) => {
   return axios.delete(`${base_url}/${id}`);
 };
 
-const updatePerson = (updatedPerson) =>{
-    return axios.put(`${base_url}/${updatedPerson.id}`, updatedPerson)
-}
+const updatePerson = (updatedPerson, setPersons, persons) => {
+  return axios
+    .put(`${base_url}/${updatedPerson.id}`, updatedPerson)
+    .then((response) =>
+      setPersons(
+        persons.map((person) =>
+          response.data.id === person.id
+            ? { ...person, number: response.data.number }
+            : { ...person },
+        ),
+      ),
+    );
+};
 
 export default {
   getAllPersons,
   addPerson,
   deletePerson,
-  updatePerson
+  updatePerson,
 };

@@ -36,7 +36,7 @@ const PersonForm = ({
           `${foundPerson.name} is already added to the phonebook, replace the old number with a new one`,
         )
       ) {
-        phonebookService.updatePerson(foundPerson);
+        phonebookService.updatePerson(foundPerson, setPersons, persons);
       }
     }
   };
