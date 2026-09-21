@@ -3,6 +3,8 @@ import phonebookService from "./services/phonebook"
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Agenda from "./components/Agenda";
+import Notification from "./components/Notification";
+import './index.css'
 
 const App = () => {
 
@@ -11,6 +13,7 @@ const App = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [newMessage, setNewMessage] = useState()
 
   let displayPersonsFilter = hasFilter
     ? persons.filter((person) => person.name.toLowerCase().includes(nameFilter.toLowerCase()))
@@ -25,6 +28,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={newMessage}/>
       <Filter
         nameFilter={nameFilter}
         setNameFilter={setNameFilter}
@@ -38,6 +42,7 @@ const App = () => {
         setPersons={setPersons}
         setNewName={setNewName}
         setNewNumber={setNewNumber}
+        setNewMessage={setNewMessage}
       ></PersonForm>
       <h2>Numbers</h2>
       <Agenda displayPersonsFilter={displayPersonsFilter} persons={persons} setPersons={setPersons}></Agenda>

@@ -7,10 +7,16 @@ const PersonForm = ({
   setPersons,
   setNewName,
   setNewNumber,
+  setNewMessage
 }) => {
   const searchDuplicated = (newPerson) => {
     return persons.find((person) => newPerson.name === person.name);
   };
+
+  const notify = () => {
+    setNewMessage(`Added ${newName}`)
+    setTimeout(()=>{setNewMessage(null)},5000)
+  }
 
   const handleNewPerson = (event) => {
     event.preventDefault();
@@ -25,7 +31,7 @@ const PersonForm = ({
 
     if (typeof foundPerson === "undefined") {
       //hacemos un post a la db.json
-      phonebookService.addPerson(newPerson, setPersons, persons);
+      phonebookService.addPerson(newPerson, setPersons, persons).then(response => notify());
       return;
     } else {
 
@@ -36,7 +42,8 @@ const PersonForm = ({
           `${foundPerson.name} is already added to the phonebook, replace the old number with a new one`,
         )
       ) {
-        phonebookService.updatePerson(foundPerson, setPersons, persons);
+        phonebookService.updatePerson(foundPerson, setPersons, persons)
+        .then(response => notify());
       }
     }
   };
