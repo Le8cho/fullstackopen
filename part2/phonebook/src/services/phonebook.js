@@ -12,8 +12,12 @@ const addPerson = (newPerson, setPersons, persons) => {
     .then((response) => setPersons(persons.concat(response.data)));
 };
 
-const deletePerson = (id) => {
-  return axios.delete(`${base_url}/${id}`);
+const deletePerson = (id, setPersons, persons) => {
+  return axios
+    .delete(`${base_url}/${id}`)
+    .then((response) =>
+      setPersons(persons.filter((person) => person.id !== response.data.id)),
+    );
 };
 
 const updatePerson = (updatedPerson, setPersons, persons) => {

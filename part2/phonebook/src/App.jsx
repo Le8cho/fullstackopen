@@ -40,7 +40,7 @@ const App = () => {
         setNewNumber={setNewNumber}
       ></PersonForm>
       <h2>Numbers</h2>
-      <Agenda displayPersonsFilter={displayPersonsFilter} setPersons={setPersons}></Agenda>
+      <Agenda displayPersonsFilter={displayPersonsFilter} persons={persons} setPersons={setPersons}></Agenda>
     </div>
   );
 };
